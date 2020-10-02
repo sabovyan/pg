@@ -1,5 +1,3 @@
-let timerOneID, timerTwoID;
-
 const { faker } = window;
 
 class Person {
@@ -8,12 +6,14 @@ class Person {
     this.age = faker.random.number({ min: 1, max: 50 });
     this.incAge();
   }
+
   incAge() {
     this.age += 1;
     setTimeout(this.incAge.bind(this), 1000);
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 const per = new Person();
 
 let people = [];
@@ -21,7 +21,8 @@ for (let i = 0; i < 4; i += 1) {
   people.push(new Person());
 }
 
-filterByAge = (limitedAge) => people.filter(({ age }) => age < limitedAge - 1);
+const filterByAge = (limitedAge) =>
+  people.filter(({ age }) => age < limitedAge - 1);
 
 setInterval(() => {
   people = filterByAge(40);
@@ -33,3 +34,5 @@ function addNewPeople() {
     people.push(new Person());
   }, 1000);
 }
+
+addNewPeople();
