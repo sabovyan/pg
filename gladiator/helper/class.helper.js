@@ -51,13 +51,14 @@ export class Gladiator {
     return opponent;
   }
 
-  fight(gladiators) {
+  fight(gladiators, list) {
     const opponent = this.getOpponent(gladiators);
-    this.hitOpponent(opponent);
+    this.hitOpponent(opponent, list);
+
     return opponent;
   }
 
-  hitOpponent(opponent) {
+  hitOpponent(opponent, list) {
     opponent.health = Math.floor(opponent.health - this.power);
     if (opponent.health >= 0 && opponent.health <= 10) {
       opponent.speed *= 3;
@@ -67,8 +68,18 @@ export class Gladiator {
         opponent.initialHealth
       ).toFixed(3);
     }
-    console.log(
-      `${this.toString()} hits ${opponent.toString()} with power ${this.power}`
-    );
+    if (list) {
+      const li = document.createElement('li');
+      li.innerText = `${this.toString()} hits ${opponent.toString()} with power ${
+        this.power
+      }`;
+      list.append(li);
+    } else {
+      console.log(
+        `${this.toString()} hits ${opponent.toString()} with power ${
+          this.power
+        }`
+      );
+    }
   }
 }
